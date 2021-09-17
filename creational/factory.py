@@ -1,8 +1,19 @@
-from utils import *
+from abc import ABC, abstractmethod
 
-class Product():
+'''
+O Factory Method é um padrão criacional de projeto que fornece uma interface 
+para criar objetos em uma superclasse, mas permite que as subclasses alterem 
+o tipo de objetos que serão criados.
+
+Permite criar objetos que possuem a mesma função que pode ser feita de formas
+diferentes. As funções devem ter a mesma entreda e saida.
+No python acho que não precisa da classe criadora.
+'''
+
+class Product(ABC):
+  @abstractmethod
   def operation(self) -> str:
-    interface_exception(self)
+    pass
 
 class ConcreteProduct1(Product):
   def operation(self) -> str:
@@ -12,14 +23,11 @@ class ConcreteProduct2(Product):
   def operation(self) -> str:
     return '{Resultado do Produto de Concreto2}'
 
-class Creator():
-  def __init__(self):
-    abstract_exception(self)
-      
-  def factory_method(self):
-    interface_exception(self)
-    
-  def some_operation(self):
+class Creator(ABC):
+  @abstractmethod
+  def factory_method(self) -> Product:
+    pass
+  def some_operation(self) -> str:
     product = self.factory_method()
     result = f'Criador: o mesmo código do criador acabou de funcionar com {product.operation()}'
     return result
@@ -36,9 +44,10 @@ def client_code(creator: Creator) -> None:
   print(f'Cliente: Não conheço a classe do criador, mas ainda funcion\n'
         f'{creator.some_operation()}')
 
-# if __name__ == '__main__':
-#   cls()
-#   print('\nApp: lançado com o ConcreteCreator1.')
-#   client_code(ConcreteCreator1())
-#   print('\nApp: lançado com o ConcreteCreator2.')
-#   client_code(ConcreteCreator2())
+if __name__ == '__main__':
+  from os import system, name
+  system('cls' if name == 'nt' else 'clear')
+  print('\nApp: lançado com o ConcreteCreator1.')
+  client_code(ConcreteCreator1())
+  print('\nApp: lançado com o ConcreteCreator2.')
+  client_code(ConcreteCreator2())
