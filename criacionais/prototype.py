@@ -1,6 +1,16 @@
 from os import system, name
 system('cls' if name == 'nt' else 'clear')
 
+'''
+O Prototype é um padrão de projeto criacional que permite copiar objetos 
+existentes sem fazer seu código ficar dependente de suas classes.
+
+Operador "=" faz uma nova referencia para o mesmo objeto.
+Método .copy() faz refencia mas permite "adicionar novos" conteúdos. É útil 
+pois cria um novo id.
+Função copy.deepcopy é que realmente cria um novo objeto clonado.
+'''
+
 def p(ver):
   print(ver)
   print('- Old List:', old_list)
