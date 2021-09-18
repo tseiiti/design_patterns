@@ -11,51 +11,52 @@ No python acho que não precisa da classe criadora.
 '''
 
 
-class Product(ABC):
+class ProdutoInterface(ABC):
   @abstractmethod
-  def operation(self) -> str:
+  def operacao(self) -> str:
     pass
 
 
-class ConcreteProduct1(Product):
-  def operation(self) -> str:
-    return '{Resultado do Produto de Concreto1}'
+class Produto1(ProdutoInterface):
+  def operacao(self) -> str:
+    return '{Resultado do Produto 1}'
 
 
-class ConcreteProduct2(Product):
-  def operation(self) -> str:
-    return '{Resultado do Produto de Concreto2}'
+class Produto2(ProdutoInterface):
+  def operacao(self) -> str:
+    return '{Resultado do Produto 2}'
 
 
-class Creator(ABC):
+class FabricaInterface(ABC):
   @abstractmethod
-  def factory_method(self) -> Product:
+  def fabricar(self) -> ProdutoInterface:
     pass
 
-  def some_operation(self) -> str:
-    product = self.factory_method()
-    result = f'Criador: o mesmo código do criador acabou de funcionar com {product.operation()}'
+  def chama_operacao(self) -> str:
+    product = self.fabricar()
+    result = f'Criador: o mesmo código da fábrica acabou de funcionar com {product.operacao()}'
     return result
 
 
-class ConcreteCreator1(Creator):
-  def factory_method(self) -> Product:
-    return ConcreteProduct1()
+class Fabrica1(FabricaInterface):
+  def fabricar(self) -> ProdutoInterface:
+    return Produto1()
 
 
-class ConcreteCreator2(Creator):
-  def factory_method(self) -> Product:
-    return ConcreteProduct2()
+class Fabrica2(FabricaInterface):
+  def fabricar(self) -> ProdutoInterface:
+    return Produto2()
 
 
-def client_code(creator: Creator) -> None:
-  print(f'Cliente: Não conheço a classe do criador, mas ainda funcion\n'
-        f'{creator.some_operation()}')
+def client_code(creator: FabricaInterface) -> None:
+  print(f'Cliente: Não conheço a classe do criador, mas ainda funciona.'
+        f'\n{creator.chama_operacao()}')
 
 if __name__ == '__main__':
   from os import system, name
   system('cls' if name == 'nt' else 'clear')
-  print('\nApp: lançado com o ConcreteCreator1.')
-  client_code(ConcreteCreator1())
-  print('\nApp: lançado com o ConcreteCreator2.')
-  client_code(ConcreteCreator2())
+  print('\nApp: lançado com o Fabrica 1.')
+  client_code(Fabrica1())
+  print('\nApp: lançado com o Fabrica 2.')
+  client_code(Fabrica2())
+

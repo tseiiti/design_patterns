@@ -13,42 +13,42 @@ Função copy.deepcopy é que realmente cria um novo objeto clonado.
 
 def p(ver):
   print(ver)
-  print('- Old List:', old_list)
-  print('- ID Old..:', id(old_list))
-  print('- New List:', new_list)
-  print('- ID New..:', id(new_list))
+  print('- Lista Velha:', lista_velha)
+  print('- Id Velha...:', id(lista_velha))
+  print('- Lista Nova.:', lista_nova)
+  print('- Id Nova....:', id(lista_nova))
   
-old_list = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
-new_list = old_list
-new_list[2][2] = 9
-old_list.append([4, 4, 4])
-old_list[1][1] = 'AA'
-old_list[3][1] = 3
+lista_velha = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
+lista_nova = lista_velha
+lista_nova[2][2] = 9
+lista_velha.append([4, 4, 4])
+lista_velha[1][1] = 'AA'
+lista_velha[3][1] = 3
 p('Versão 1:')
 
-old_list = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
-new_list = old_list.copy()
-new_list[2][2] = 9
-old_list.append([4, 4, 4])
-old_list[1][1] = 'AA'
-old_list[3][1] = 3
+lista_velha = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
+lista_nova = lista_velha.copy()
+lista_nova[2][2] = 9
+lista_velha.append([4, 4, 4])
+lista_velha[1][1] = 'AA'
+lista_velha[3][1] = 3
 p('Versão 2:')
 
 import copy
-old_list = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
-new_list = copy.copy(old_list)
-new_list[2][2] = 9
-old_list.append([4, 4, 4])
-old_list[1][1] = 'AA'
-old_list[3][1] = 3
+lista_velha = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
+lista_nova = copy.copy(lista_velha)
+lista_nova[2][2] = 9
+lista_velha.append([4, 4, 4])
+lista_velha[1][1] = 'AA'
+lista_velha[3][1] = 3
 p('Versão 3:')
 
 import copy
-old_list = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
-new_list = copy.deepcopy(old_list)
-new_list[2][2] = 9
-old_list.append([4, 4, 4])
-old_list[1][1] = 'AA'
-old_list[3][1] = 3
+lista_velha = [[1, 2, 3], [4, 5, 6], [7, 8, 'a']]
+lista_nova = copy.deepcopy(lista_velha)
+lista_nova[2][2] = 9
+lista_velha.append([4, 4, 4])
+lista_velha[1][1] = 'AA'
+lista_velha[3][1] = 3
 p('Versão 4:')
 

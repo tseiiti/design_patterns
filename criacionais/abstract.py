@@ -10,83 +10,84 @@ semelhantes. Os objetos devem ter as mesmas funções da família.
 '''
 
 
-class AbstractProductA(ABC):
+class ProdutoAAbstract(ABC):
   @abstractmethod
-  def useful_function_a(self) -> str:
+  def funcao_util_a(self) -> str:
     pass
 
 
-class ConcreteProductA1(AbstractProductA):
-  def useful_function_a(self) -> str:
+class ProdutoA1(ProdutoAAbstract):
+  def funcao_util_a(self) -> str:
     return 'resultado do produto A1'
 
 
-class ConcreteProductA2(AbstractProductA):
-  def useful_function_a(self) -> str:
+class ProdutoA2(ProdutoAAbstract):
+  def funcao_util_a(self) -> str:
     return 'resultado do produto A2'
 
 
-class AbstractProductB(ABC):
+class ProdutoBAbstract(ABC):
   @abstractmethod
-  def useful_function_b(self) -> str:
+  def funcao_util_b(self) -> str:
     pass
 
   @abstractmethod
-  def another_useful_function_b(self, collaborator: AbstractProductA) -> str:
+  def outra_funcao_util_b(self, colaborador: ProdutoAAbstract) -> str:
     pass
 
 
-class ConcreteProductB1(AbstractProductB):
-  def useful_function_b(self) -> str:
+class ProdutoB1(ProdutoBAbstract):
+  def funcao_util_b(self) -> str:
     return 'O resultado do produto B1.'
-  def another_useful_function_b(self, collaborator: AbstractProductA) -> str:
-    result = collaborator.useful_function_a()
+  def outra_funcao_util_b(self, colaborador: ProdutoAAbstract) -> str:
+    result = colaborador.funcao_util_a()
     return f'O resultado do B1 colaborando com o ({result})'
 
 
-class ConcreteProductB2(AbstractProductB):
-  def useful_function_b(self) -> str:
+class ProdutoB2(ProdutoBAbstract):
+  def funcao_util_b(self) -> str:
     return 'O resultado do produto B2.'
-  def another_useful_function_b(self, collaborator: AbstractProductA) -> str:
-    result = collaborator.useful_function_a()
+  def outra_funcao_util_b(self, colaborador: ProdutoAAbstract) -> str:
+    result = colaborador.funcao_util_a()
     return f'O resultado do B2 colaborando com o ({result})'
 
 
-class AbstractFactory(ABC):
+class FabricaAbstract(ABC):
   @abstractmethod
-  def create_product_a(self) -> AbstractProductA:
+  def cria_produto_a(self) -> ProdutoAAbstract:
     pass
 
   @abstractmethod
-  def create_product_b(self) -> AbstractProductB:
+  def cria_produto_b(self) -> ProdutoBAbstract:
     pass
 
 
-class ConcreteFactory1(AbstractFactory):
-  def create_product_a(self) -> AbstractProductA:
-    return ConcreteProductA1()
-  def create_product_b(self) -> AbstractProductB:
-    return ConcreteProductB1()
+class Fabrica1(FabricaAbstract):
+  def cria_produto_a(self) -> ProdutoAAbstract:
+    return ProdutoA1()
+  def cria_produto_b(self) -> ProdutoBAbstract:
+    return ProdutoB1()
 
 
-class ConcreteFactory2(AbstractFactory):
-  def create_product_a(self) -> AbstractProductA:
-    return ConcreteProductA2()
+class Fabrica2(FabricaAbstract):
+  def cria_produto_a(self) -> ProdutoAAbstract:
+    return ProdutoA2()
 
-  def create_product_b(self) -> AbstractProductB:
-    return ConcreteProductB2()
+  def cria_produto_b(self) -> ProdutoBAbstract:
+    return ProdutoB2()
 
 
-def client_code(factory: AbstractFactory) -> None:
-  product_a = factory.create_product_a()
-  product_b = factory.create_product_b()
-  print(f'{product_b.useful_function_b()}')
-  print(f'{product_b.another_useful_function_b(product_a)}')
+def client_code(fabrica: FabricaAbstract) -> None:
+  produto_a = fabrica.cria_produto_a()
+  produto_b = fabrica.cria_produto_b()
+  print(f'{produto_b.funcao_util_b()}')
+  print(f'{produto_b.outra_funcao_util_b(produto_a)}')
 
 if __name__ == '__main__':
   from os import system, name
   system('cls' if name == 'nt' else 'clear')
-  print('\nCliente: Testando o código do cliente com o primeiro tipo de fábrica:')
-  client_code(ConcreteFactory1())
+
+  print('Cliente: Testando o código do cliente com o primeiro tipo de fábrica:')
+  client_code(Fabrica1())
   print('\nCliente: Testando o mesmo código de cliente com o segundo tipo de fábrica:')
-  client_code(ConcreteFactory2())
+  client_code(Fabrica2())
